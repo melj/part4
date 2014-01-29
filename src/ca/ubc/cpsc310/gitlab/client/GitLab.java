@@ -1,10 +1,5 @@
 package ca.ubc.cpsc310.gitlab.client;
 
-import java.util.List;
-
-import ca.ubc.cpsc310.gitlab.client.user.IUser;
-import ca.ubc.cpsc310.gitlab.client.service.LoadUsersService;
-import ca.ubc.cpsc310.gitlab.client.service.LoadUsersServiceAsync;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -12,6 +7,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
+
+import java.util.List;
+
+import ca.ubc.cpsc310.gitlab.client.user.IUser;
+import ca.ubc.cpsc310.gitlab.client.service.LoadUsersService;
+import ca.ubc.cpsc310.gitlab.client.service.LoadUsersServiceAsync;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -34,16 +35,17 @@ public class GitLab implements EntryPoint {
 	public void onModuleLoad() {
 		
 		service.getUsers(new AsyncCallback<List<IUser>>() {
-
+			@Override
+			public void onSuccess(List<IUser> result) {
+				displayUsers(result);
+			}
+			
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Error occured " + caught.getClass() + " : " + caught.getMessage());				
 			}
 
-			@Override
-			public void onSuccess(List<IUser> result) {
-				displayUsers(result);
-			}});
+			});
 	}
 	
 	/**
