@@ -22,7 +22,7 @@ public class GitLab implements EntryPoint {
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
 	 */
-	private static final String SERVER_ERROR = "An error occurred while "
+	private static final String SERVER_ERROR_MSG = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
 
@@ -43,7 +43,7 @@ public class GitLab implements EntryPoint {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Error occured " + caught.getClass() + " : " + caught.getMessage());				
+				Window.alert(SERVER_ERROR_MSG);				
 			}
 
 			});
@@ -65,6 +65,7 @@ public class GitLab implements EntryPoint {
 		flexTable.setStyleName("centered-table", true);
 		flexTable.setStyleName("centered-text", true);
 		
+				
 		for(int i=0; i < users.size(); i++)	{
 		
 			IUser user = users.get(i);
