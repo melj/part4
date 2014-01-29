@@ -1,5 +1,7 @@
 package ca.ubc.cpsc310.gitlab.client;
 
+import java.util.List;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -7,8 +9,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
-
-import java.util.List;
 
 import ca.ubc.cpsc310.gitlab.client.user.IUser;
 import ca.ubc.cpsc310.gitlab.client.service.LoadUsersService;
@@ -36,16 +36,15 @@ public class GitLab implements EntryPoint {
 		
 		service.getUsers(new AsyncCallback<List<IUser>>() {
 			@Override
-			public void onSuccess(List<IUser> result) {
-				displayUsers(result);
-			}
-			
-			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Error occured " + caught.getClass() + " : " + caught.getMessage());				
 			}
-
-			});
+			
+			@Override
+			public void onSuccess(List<IUser> result) {
+				displayUsers(result);
+				Window.alert("Done!");
+			}});
 	}
 	
 	/**
@@ -61,6 +60,7 @@ public class GitLab implements EntryPoint {
 		flexTable.setText(0,1,"Language");
 		flexTable.setText(0,2, "Cart Size");
 		flexTable.setText(0,3, "Wish List Size");
+		// Comment explaining the code beneath
 		flexTable.setStyleName("centered-table", true);
 		
 		for(int i=0; i < users.size(); i++)	{
