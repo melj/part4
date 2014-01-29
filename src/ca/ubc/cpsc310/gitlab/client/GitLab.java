@@ -1,5 +1,7 @@
 package ca.ubc.cpsc310.gitlab.client;
 
+import java.util.List;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -7,8 +9,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
-
-import java.util.List;
 
 import ca.ubc.cpsc310.gitlab.client.user.IUser;
 import ca.ubc.cpsc310.gitlab.client.service.LoadUsersService;
@@ -18,6 +18,7 @@ import ca.ubc.cpsc310.gitlab.client.service.LoadUsersServiceAsync;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class GitLab implements EntryPoint {
+
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -36,17 +37,15 @@ public class GitLab implements EntryPoint {
 		
 		service.getUsers(new AsyncCallback<List<IUser>>() {
 			@Override
-			public void onSuccess(List<IUser> result) {				
-				displayUsers(result);
-				Window.alert("Yay! Done");
-			}
-			
-			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert(SERVER_ERROR_MSG);				
 			}
-
-			});
+			
+			@Override
+			public void onSuccess(List<IUser> result) {
+				displayUsers(result);
+				Window.alert("Done!");
+			}});
 	}
 	
 	/**
@@ -61,7 +60,7 @@ public class GitLab implements EntryPoint {
 		
 		flexTable.setText(0,1,"Language");
 		flexTable.setText(0,2, "Cart Size");
-		flexTable.setText(0,3, "Wish List Size");		
+		flexTable.setText(0,3, "Wish List Size");
 		flexTable.setStyleName("centered-table", true);
 		flexTable.setStyleName("centered-text", true);
 		
