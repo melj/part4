@@ -36,8 +36,9 @@ public class GitLab implements EntryPoint {
 		
 		service.getUsers(new AsyncCallback<List<IUser>>() {
 			@Override
-			public void onSuccess(List<IUser> result) {
+			public void onSuccess(List<IUser> result) {				
 				displayUsers(result);
+				Window.alert("Yay! Done");
 			}
 			
 			@Override
@@ -60,8 +61,9 @@ public class GitLab implements EntryPoint {
 		
 		flexTable.setText(0,1,"Language");
 		flexTable.setText(0,2, "Cart Size");
-		flexTable.setText(0,3, "Wish List Size");
+		flexTable.setText(0,3, "Wish List Size");		
 		flexTable.setStyleName("centered-table", true);
+		flexTable.setStyleName("centered-text", true);
 		
 		for(int i=0; i < users.size(); i++)	{
 		

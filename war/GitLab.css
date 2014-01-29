@@ -33,6 +33,10 @@ h1 {
   margin: 15px 6px 6px;
 }
 
+.centered-text {
+	text-align: center;
+}
+
 .centered-table
 {
 	margin-left: auto;
